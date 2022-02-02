@@ -1,0 +1,99 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+header {
+    background-color: #1F2937;
+    display: flex;
+    justify-content: center;
+}
+.header_logo{
+    color: #F9FAF8;
+    font-size: 36px;
+    font-weight: 900;
+}
+
+main{
+display: flex;
+flex-direction: column;
+height: auto;
+color: #1F2937;
+justify-content: center;
+text-align: center;
+
+}
+.instruction {
+    font-size: 24px;
+    font-weight:900; 
+    background-color: white;
+}
+
+game{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#buttons{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+button{
+    background-color: #3882F6;
+    color: white;
+    padding:10px 0;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    width: 150px;
+    border-color: white;
+    margin: 0;
+
+}
+#counter{
+    display: flex;
+    gap: 36px;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding-bottom: 20px;
+}
+.scorecard{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 150px;
+    height: 200px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    border-style: solid;
+    border-radius: 20px;
+    border-color: #1F2937;
+    
+}
+number{
+    font-size: 64px;
+}
+#resbut{
+    margin-top: 16px;
+    width: 300px;
+}
+footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1F2937;
+    color: white;
+    font-size: 18px;
+}

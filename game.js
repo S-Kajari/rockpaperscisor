@@ -1,67 +1,65 @@
-let computerPoints = 0;
-let playerPoints = 0;
-
 //random number calculator for computer choice
 function computerPlay(){
     let array = ["rock", "paper", "scissor"];
     let num = Math.ceil(Math.random() * 3);
     return array[num - 1];
 }
-//function to play one round
+//logic
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection){
-        return "It's a tie!";
-    }
-    else if (playerSelection === "rock" && computerSelection ==="paper"){
-        return "Computer wins!"
-    }
-    else if (playerSelection === "rock" && computerSelection ==="scissor"){
-        return "You win!"
-    }
-    else if (playerSelection === "paper" && computerSelection ==="scissor"){
-        return "Computer wins!"
-    }
-    else if (playerSelection === "paper" && computerSelection ==="rock"){
-        return "You win!"
-    }
-    else if (playerSelection === "scissor" && computerSelection ==="paper"){
-        return "You win!"
-    }
-    else if (playerSelection === "scissor" && computerSelection ==="rock"){
-        return "Computer wins!"
+        return "It's a tie";
+    } else if (
+        (computerSelection === 'rock' && playerSelection === 'scissor') ||
+        (computerSelection === 'scissor' && playerSelection === 'paper') ||
+        (computerSelection === 'paper' && playerSelection === 'rock')){
+        return "Computer"
+    } else if (
+        (playerSelection === 'rock' && computerSelection === 'scissor') ||
+        (playerSelection === 'scissor' && computerSelection === 'paper') ||
+        (playerSelection === 'paper' && computerSelection === 'rock')){
+        return "Player"
     }
 }  
 
-
-const buttons = document.querySelectorAll('button');
+let computerPoints = 0;
+let playerPoints = 0;
+const buttonsDiv = document.getElementById("buttons");
+const buttons = buttonsDiv.querySelectorAll('button');
+const counterComputer = document.getElementById("numbercomputer")
+const counterPlayer = document.getElementById("numberplayer")
+//play round
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
     let playerSelection = button.id;
     let computerSelection = computerPlay();
     let message = (playRound(playerSelection, computerSelection));
-    if (message === 'Computer wins!'){
+    if (message === 'Computer'){
         computerPoints += 1;
-    } else if (message === "You win!"){
+    } else if (message === "Player"){
         playerPoints += 1;
     }
-    const container = document.querySelector('#result');
-    const counterText = document.getElementById("counter")
-    counterText.innerHTML = ('Computer points: ' + computerPoints + '<br/> Player points: ' + playerPoints);
-    container.innerHTML = ('In this round <br/> Your choice was: ' + playerSelection + '<br/> Computer choice was: ' + computerSelection + '<br/>' + message);
-    
-    const body = document.querySelector('body');
-    const resetMSG = document.createElement('div')
+//write pionts to board and anounce round result
+    counterComputer.innerText = computerPoints; 
+    counterPlayer.innerText =  playerPoints;
+    document.getElementById("result").innerText = "This round goes to: " + message;
+//check points status, and if someone reached 5 points anounce result with reset button  
     if (computerPoints === 5 || playerPoints === 5){
         if (computerPoints > playerPoints){
-            resetMSG.innerHTML = ('Computer wins this game. <br/>For a new game reload page');
-            resetMSG.style.color="red";
+            resetButton.innerHTML = 'Computer wins this game!</br>Click here to start a new one.';
+            resetButton.style.backgroundColor = "red";
+            resetButton.style.display = "block";
         } else {
-            resetMSG.innerHTML = ('You won this game. <br/>For a new game reload page');
-            resetMSG.style.color="green";
+            resetButton.innerHTML = 'You won this game!</br>Click here to start a new one.';
+            resetButton.style.backgroundColor= "green";
+            resetButton.style.display = "block";
         }
-        body.appendChild(resetMSG)
-        var div = document.getElementById("buttons");
-        div.remove();
+        //remove game buttons
+        buttonsDiv.style.display = "none";
     }
   });
+});
+//reset button script
+const resetButton = document.getElementById("resbut");
+resetButton.addEventListener('click', () => {
+    location.reload();
 });
